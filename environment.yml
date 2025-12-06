@@ -1,0 +1,12 @@
+name: mne_lsl_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  # It is often best practice to install the underlying C++ LSL library via conda 
+  # to avoid OS-specific driver issues, though pip often bundles it.
+  - liblsl 
+  - pip:
+      - mne-lsl
