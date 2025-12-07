@@ -2,6 +2,7 @@ import numpy as np
 from scipy.signal import butter, filtfilt, welch
 from scipy.integrate import simpson
 from config import (SAMPLING_RATE, BANDPASS_LOW, BANDPASS_HIGH, BAND_RANGES)
+from mne.time_frequency import psd_array_multitaper
 
 class SignalProcessor:
     def __init__(self):
@@ -26,7 +27,7 @@ class SignalProcessor:
         }
 
     def _compute_all_bandpowers(self, data):
-        freqs, psd = welch(data, SAMPLING_RATE)
+        psd, freqs = psd_array_multitaper(data, SAMPLING_RATE, verbose="ERROR")
         freq_res = freqs[1] - freqs[0]
 
         band_powers = {}
